@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>Projeto Doadores</title>
+		<link type="text/css" rel="stylesheet" href="responsive/bootstrap/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/general.css" />
+	</h:head>
+	
+	<h:body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="index.xhtml">Projeto Doadores</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarResponsive" aria-controls="navbarResponsive"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="index.xhtml">Inicio</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="sobre.xhtml">Sobre</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="serdoador.xhtml">Ser
+						Doador(a)</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="encontrehemocentros.xhtml">Hemocentros <span
+						class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="contato.xhtml">Contato</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	
+	<div class="container">
+		<br /> <br /> <br />
+		<header class="bg-primary text-white">
+		<div class="container text-center">
+			<h1>Projeto Doadores</h1>
+			<p class="lead">Uma página desenvolvida para disseminar
+				informação sobre doação de sangue.</p>
+		</div>
+		</header>
+
+		<br />
+		<h:form>
+			<div>
+				<p:panel header="Encontre o hemocentro mais próximo de você">
+					<p:panelGrid>
+						<p:column style="border: none">
+							<p:outputLabel value="Estado:"/>
+						</p:column>
+						<p:column style="border: none">
+							<h:selectOneMenu >
+								<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
+								<f:selectItems value="#{estadoBean.estados}" />
+								<p:ajax event="change" execute="@this" listener="#{estadoBean.carregaCidades}" render="comboCidade, tableHemocentros" update="comboCidade, tableHemocentros"/>
+							</h:selectOneMenu>
+						</p:column>
+			
+						<p:column style="border: none">
+							<p:outputLabel value="Cidade:" />
+						</p:column>
+						<p:column style="border: none">
+							<h:selectOneMenu id="comboCidade" >
+								<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
+								<f:selectItems value="#{estadoBean.cidades}"/>
+								<p:ajax event="change" execute="@this" listener="#{estadoBean.carregaHemocentrosCidade()}" render="tableHemocentros" update="tableHemocentros"/>
+							</h:selectOneMenu>
+						</p:column>
+					</p:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+		<br/>
+		<br/>
+		<p:dataTable var="hemo" value="#{estadoBean.hemocentros}" id="tableHemocentros">
+			<p:column headerText="Hemocentro">
+				<h:outputText value="#{hemo.nome}" />
+			</p:column>
+			<p:column headerText="Endereço">
+				<h:outputText value="#{hemo.endereco}" />
+			</p:column>
+			<p:column headerText="CEP" style="width:100px">
+				<h:outputText value="#{hemo.cep}" />
+			</p:column>
+			<p:column headerText="Telefone" style="width:150px">
+				<h:outputText value="#{hemo.telefone}" />
+			</p:column>
+			<p:column headerText="E-mail">
+				<p:outputLabel value="#{hemo.email}"/>
+			</p:column>
+		</p:dataTable>
+		<br/>
+		</div>
+		
+		<footer class="py-5 bg-dark">
+	<div class="container">
+		<p class="m-0 text-center text-white">Copyright &copy; Projeto
+			Doadores 2020</p>
+	</div>
+	</footer>
+
+	<script src="responsive/jquery/jquery.min.js"></script>
+	<script src="responsive/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</h:body>
+	
+	
+</html>
