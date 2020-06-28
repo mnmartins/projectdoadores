@@ -21,15 +21,15 @@ public class SendMailBean {
 	private String email;
 	private String mensagem;
 	private String message;
-	 
-    public String getMessage() {
-        return message;
-    }
- 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -53,43 +53,46 @@ public class SendMailBean {
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
-	
+
 	public void enviarMensagemContato() {
-		if((nome != null && !nome.trim().equals("")) && (email != null && !email.trim().equals("")) && (mensagem != null && !mensagem.trim().equals(""))) {
+		if ((nome != null && !nome.trim().equals("")) && (email != null && !email.trim().equals(""))
+				&& (mensagem != null && !mensagem.trim().equals(""))) {
 			Properties props = new Properties();
 			props.setProperty("mail.host", "smtp.gmail.com");
 			props.setProperty("mail.smtp.port", "587");
 			props.setProperty("mail.smtp.starttls.enable", "true");
 			props.setProperty("mail.smtp.auth", "true");
-			//props.setProperty("mail.transport.protocol", "smtp");
+			// props.setProperty("mail.transport.protocol", "smtp");
 			props.setProperty("mail.debug", "true");
-		    
-		    Session sessao = Session.getInstance(props, new javax.mail.Authenticator() {
-		    	protected PasswordAuthentication getPasswordAuthentication() {
-		    		return new PasswordAuthentication("projectdoadores@gmail.com", "projetodoe");
-		    		}
-		    	});
-		    
-		    try {
-		    	MimeMessage email = new MimeMessage(sessao);
-		    	email.setFrom(new InternetAddress(this.email));
-		    	email.addRecipient(Message.RecipientType.TO,new InternetAddress("projectdoadores@gmail.com"));
-		    	email.setSubject("Mensagem de Contato");
-		    	email.setText(mensagem);
-		    	
-		    	Transport.send(email);
-		    	
-		    	} catch (MessagingException mex) {
-		    		mex.printStackTrace();
-		    		
-		    	} catch (Exception e) {
-		    		e.printStackTrace();
-		    		
-		    	} finally {
-		    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensagem enviada!", "Mensagem enviada com sucesso!"));
-		    	}
+
+			Session sessao = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication("projectdoadores@gmail.com", "projetodoe");
+				}
+			});
+
+			try {
+				MimeMessage email = new MimeMessage(sessao);
+				email.setFrom(new InternetAddress(this.email));
+				email.addRecipient(Message.RecipientType.TO, new InternetAddress("projectdoadores@gmail.com"));
+				email.setSubject("Mensagem de Contato");
+				email.setText(mensagem);
+
+				Transport.send(email);
+
+			} catch (MessagingException mex) {
+				mex.printStackTrace();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensagem enviada!", "Mensagem enviada com sucesso!"));
+			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Dados incompletos!", "Impossível enviar mensagem, um dos campos do formulário não foi preenchido!"));
-		}	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Dados incompletos!",
+					"Impossível enviar mensagem, um dos campos do formulário não foi preenchido!"));
+		}
 	}
 }

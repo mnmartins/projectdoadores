@@ -11,13 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
 /**
  * The persistent class for the cidade database table.
  * 
  */
 @Entity
-@NamedQuery(name="Cidade.findAll", query="SELECT c FROM Cidade c")
+@NamedQuery(name = "Cidade.findAll", query = "SELECT c FROM Cidade c")
 public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,12 +27,12 @@ public class Cidade implements Serializable {
 
 	private String nome;
 
-	//bi-directional many-to-one association to Estado
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="uf")
+	// bi-directional many-to-one association to Estado
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uf")
 	private Estado estado;
-	
-	@OneToMany(mappedBy="estado")
+
+	@OneToMany(mappedBy = "estado")
 	private List<Hemocentro> hemocentros;
 
 	public Cidade() {

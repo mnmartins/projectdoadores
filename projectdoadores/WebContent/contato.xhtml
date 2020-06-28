@@ -4,93 +4,107 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui" lang="pt">
-	
-	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<title>Projeto Doadores</title>
-		<link type="text/css" rel="stylesheet" href="responsive/bootstrap/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/css/general.css" />
-	</h:head>
-	<h:body>
-	
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index.xhtml">Projeto Doadores</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="index.xhtml">Inicio</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="sobre.xhtml">Sobre</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="serdoador.xhtml">Ser
-							Doador(a)</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="encontrehemocentros.xhtml">Hemocentros</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="contato.xhtml">Contato <span class="sr-only">(current)</span>
-					</a></li>
-				</ul>
-			</div>
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Projeto Doadores</title>
+	<link type="text/css" rel="stylesheet"
+		href="responsive/bootstrap/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="/css/general.css" />
+</h:head>
+<h:body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="index.xhtml">Projeto Doadores</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarResponsive" aria-controls="navbarResponsive"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="index.xhtml">Inicio</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="sobre.xhtml">Sobre</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="serdoador.xhtml">Ser
+						Doador(a)</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="encontrehemocentros.xhtml">Hemocentros</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="contato.xhtml">Contato <span class="sr-only">(current)</span>
+				</a></li>
+			</ul>
 		</div>
-		</nav>
-		<br /> <br /> <br />
-		<div class="container">
-			<header class="bg-primary text-white">
-			<div class="container text-center">
-				<h1>Projeto Doadores</h1>
-				<p class="lead">Uma página desenvolvida para disseminar
-					informação sobre doação de sangue.</p>
-			</div>
-			</header>
-		<br /><p:growl id="messages" showDetail="true" sticky="true" showSummary="false" />
-			<h:form>
-				<p:panel header="Mensagem de contato">
-					<p:panelGrid style="width:1050px">
-						<p:column style="border: none; width:50px" >
-							<p:outputLabel value="*Nome: "/><br/><br/>
-							<p:outputLabel value="*Email: "/>
-						</p:column>
-						<p:column style="border: none; width:50px" >
-							<p:inputText value="#{emailBean.nome}" required="true" requiredMessage="O campo Nome não pode ser vazio!">
-								<f:ajax event="change" execute="@this"/>
-							</p:inputText>
-							<br/><br/>
-							<p:inputText value="#{emailBean.email}" required="true" requiredMessage="O campo e-mail não pode ser vazio!">
-								<f:ajax event="change" execute="@this"/>
-							</p:inputText>
-						</p:column>
-						<p:column style="border: none; width:50px" >
-							<p:outputLabel value="*Mensagem: "/>
-						</p:column>
-						<p:column style="border: none; width:50px" >
-							<p:inputTextarea autoResize="true" value="#{emailBean.mensagem}" maxlength="500" required="true" requiredMessage="O campo de texto da mensagem não pode ser vazio!">
-								<f:ajax event="change" execute="@this"/>
-							</p:inputTextarea>
-							<br/>
-							<p:commandButton value="Enviar" process="@this" action="#{emailBean.enviarMensagemContato}" update="messages"/>
-						</p:column>
-					</p:panelGrid>
-				</p:panel>
-			</h:form>
+	</div>
+	</nav>
+	<br />
+	<br />
+	<br />
+	<div class="container">
+		<header class="bg-primary text-white">
+		<div class="container text-center">
+			<h1>Projeto Doadores</h1>
+			<p class="lead">Uma página desenvolvida para disseminar
+				informação sobre doação de sangue.</p>
 		</div>
+		</header>
 		<br />
-	
-		<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Projeto
-				Doadores 2020</p>
-		</div>
-		</footer>
-	
-		<script src="responsive/jquery/jquery.min.js"></script>
-		<script src="responsive/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
-	</h:body>
+		<p:growl id="messages" showDetail="true" sticky="true"
+			showSummary="false" />
+		<h:form>
+			<p:panel header="Mensagem de contato">
+				<p:panelGrid style="width:1050px">
+					<p:column style="border: none; width:50px">
+						<p:outputLabel value="*Nome: " />
+						<br />
+						<br />
+						<p:outputLabel value="*Email: " />
+					</p:column>
+					<p:column style="border: none; width:50px">
+						<p:inputText value="#{emailBean.nome}" required="true"
+							requiredMessage="O campo Nome não pode ser vazio!">
+							<f:ajax event="change" execute="@this" />
+						</p:inputText>
+						<br />
+						<br />
+						<p:inputText value="#{emailBean.email}" required="true"
+							requiredMessage="O campo e-mail não pode ser vazio!">
+							<f:ajax event="change" execute="@this" />
+						</p:inputText>
+					</p:column>
+					<p:column style="border: none; width:50px">
+						<p:outputLabel value="*Mensagem: " />
+					</p:column>
+					<p:column style="border: none; width:50px">
+						<p:inputTextarea autoResize="true" value="#{emailBean.mensagem}"
+							maxlength="500" required="true"
+							requiredMessage="O campo de texto da mensagem não pode ser vazio!">
+							<f:ajax event="change" execute="@this" />
+						</p:inputTextarea>
+						<br />
+						<p:commandButton value="Enviar" process="@this"
+							action="#{emailBean.enviarMensagemContato}" update="messages" />
+					</p:column>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+	<br />
+
+	<footer class="py-5 bg-dark">
+	<div class="container">
+		<p class="m-0 text-center text-white">Copyright &copy; Projeto
+			Doadores 2020</p>
+	</div>
+	</footer>
+
+	<script src="responsive/jquery/jquery.min.js"></script>
+	<script src="responsive/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</h:body>
 
 </html>

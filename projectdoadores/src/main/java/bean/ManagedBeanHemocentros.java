@@ -14,45 +14,47 @@ import model.Cidade;
 import model.Estado;
 import model.Hemocentro;
 
-@ManagedBean (name = "estadoBean")
+@ManagedBean(name = "estadoBean")
 @ViewScoped
 public class ManagedBeanHemocentros {
 	private DAO daoGenerico = new DAO<>();
 	private List<SelectItem> list = new ArrayList<SelectItem>();
 	private List<SelectItem> listCidades = new ArrayList<SelectItem>();
 	private Cidade cidade = new Cidade();
-	
+
 	private List<Estado> estados;
 	private List<SelectItem> cidades;
 	private List<Hemocentro> hemocentros;
 	private Hemocentro hemocentro = new Hemocentro();
-	
-	
+
 	public List<SelectItem> getEstados() {
 		estados = daoGenerico.listarTodasEntidades(Estado.class);
-		
+
 		for (Estado e : estados) {
 			list.add(new SelectItem(e.getId(), e.getUf()));
 		}
 		return list;
 	}
-	/**public List<SelectItem> getEstados() {
-		estados = iDaoPessoa.listaEstados();
-		return estados;
-	}*/
-	
+
+	/**
+	 * public List<SelectItem> getEstados() {
+	 * estados = iDaoPessoa.listaEstados();
+	 * return estados;
+	 * }
+	 */
+
 	public void carregaCidades(AjaxBehaviorEvent event) {
-		
+
 		String estadoId = (String) ((HtmlSelectOneMenu) event.getSource()).getValue();
 
 		if (estadoId != null) {
 			Estado estado = (Estado) daoGenerico.pesquisarEntidadeById(Long.parseLong(estadoId), Estado.class);
 			carregaHemocentrosEstado(estado);
-			
+
 			cidade.setEstado(estado);
 
 			List<Cidade> cidades = daoGenerico.pesquisarEntidadeByUf(estado.getId().intValue(), Cidade.class);
-			
+
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
 			for (Cidade cidade : cidades) {
@@ -60,9 +62,9 @@ public class ManagedBeanHemocentros {
 			}
 
 			setCidades(selectItemsCidade);
-			
+
 		}
-		
+
 	}
 
 	private void carregaHemocentrosEstado(Estado estado) {
@@ -72,21 +74,21 @@ public class ManagedBeanHemocentros {
 			hemocentros = daoGenerico.pesquisarHemocentroByUf(estado.getId(), Hemocentro.class);
 		}
 	}
-	
-	//TODO corrigir listener
+
+	// TODO corrigir listener
 	private void carregaHemocentrosCidade(AjaxBehaviorEvent event) {
 		String cidadeId = (String) ((HtmlSelectOneMenu) event.getSource()).getValue();
-		
+
 		if (cidadeId != null) {
 			Cidade cidade = (Cidade) daoGenerico.pesquisarEntidadeById(Long.parseLong(cidadeId), Cidade.class);
-			
-			//hemocentro.setEstado(estado);
+
+			// hemocentro.setEstado(estado);
 			hemocentro.setCidade(cidade);
 
 			hemocentros = daoGenerico.pesquisarHemocentroByUfCidade(cidade.getEstado().getId(), cidade.getId(), Hemocentro.class);
 		}
 	}
-		
+
 	public List<SelectItem> getCidades() {
 		return cidades;
 	}
@@ -94,19 +96,19 @@ public class ManagedBeanHemocentros {
 	public void setCidades(List<SelectItem> cidades) {
 		this.cidades = cidades;
 	}
-	
+
 	public void setHemocentro(Hemocentro hemocentro) {
 		this.hemocentro = hemocentro;
 	}
-	
+
 	public Hemocentro getHemocentro() {
 		return hemocentro;
 	}
-	
+
 	public void setHemocentros(List<Hemocentro> hemocentros) {
 		this.hemocentros = hemocentros;
 	}
-	
+
 	public List<Hemocentro> getHemocentros() {
 		return hemocentros;
 	}

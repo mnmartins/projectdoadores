@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import conexao.Conexao;
-import model.Hemocentro;
 
 public class DAO<E> {
 
@@ -66,7 +65,7 @@ public class DAO<E> {
 			entityManager = new Conexao().getEntityManager();
 			EntityTransaction transaction = entityManager.getTransaction();
 			transaction.begin();
-			List<E> lista = entityManager.createQuery("from "+ entidade.getSimpleName() +" where estado.id = " + uf).getResultList();
+			List<E> lista = entityManager.createQuery("from " + entidade.getSimpleName() + " where estado.id = " + uf).getResultList();
 
 			transaction.commit();
 
@@ -91,13 +90,13 @@ public class DAO<E> {
 			entityManager.close();
 		}
 	}
-	
+
 	public List<E> pesquisarHemocentroByUf(long uf, Class<E> entidade) {
 		try {
 			entityManager = new Conexao().getEntityManager();
 			EntityTransaction transaction = entityManager.getTransaction();
 			transaction.begin();
-			List<E> lista = entityManager.createQuery("from "+ entidade.getSimpleName() +" where uf = " + uf).getResultList();
+			List<E> lista = entityManager.createQuery("from " + entidade.getSimpleName() + " where uf = " + uf).getResultList();
 
 			transaction.commit();
 
@@ -106,13 +105,14 @@ public class DAO<E> {
 			entityManager.close();
 		}
 	}
-	
+
 	public List<E> pesquisarHemocentroByUfCidade(Long uf, Long cidade, Class<E> entidade) {
 		try {
 			entityManager = new Conexao().getEntityManager();
 			EntityTransaction transaction = entityManager.getTransaction();
 			transaction.begin();
-			List<E> lista = entityManager.createQuery("from "+ entidade.getSimpleName() +" where uf = " + uf + " and cidade = " + cidade).getResultList();
+			List<E> lista = entityManager.createQuery("from " + entidade.getSimpleName() + " where uf = " + uf + " and cidade = " + cidade)
+					.getResultList();
 
 			transaction.commit();
 
